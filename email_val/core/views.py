@@ -4,14 +4,36 @@ from core.forms import UploadCsvForm
 
 
 def home(request):
-    csv_form = UploadCsvForm()
 
     if request.method == 'POST':
+        csv_form = UploadCsvForm(request.POST, request.FILES)
 
-        data = request.FILES['csv'].read().decode()
-        data = [mail.strip() for mail in data.split(';')]
+        if csv_form.is_valid():
+            warnings = []
+            data = request.FILES['csv'].read().decode().split('\n')
+            data = [line.split(';') for line in data]
 
-        return render(request, 'core/home.html', {'csv_form': csv_form,
-                                                  'emails': data})
+            columns = csv_form.cleaned_data['columns'].split(',')
+
+            try:
+                columns = [int(n) for n in columns]
+            except ValueError:
+                warnings.append('Invalid columns format. You have to put'
+                                'numbers separated by  commas. For example: 0, 3')
+
+                return render(request, 'core/home.html', {'csv_form': csv_form,
+                                                          'warning': warnings,
+                                                          'data': data})
+            emails = [line[col]
+                      for line in data
+                      for col in columns
+                      if len(line) > col]
+
+            return render(request, 'core/home.html', {'csv_form': csv_form,
+                                                      'emails': emails,
+                                                      'data': data})
+
+    else:
+        csv_form = UploadCsvForm()
 
     return render(request, 'core/home.html', {'csv_form': csv_form})

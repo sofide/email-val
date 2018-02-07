@@ -13,6 +13,9 @@
                 <input type="submit" value="Submit" class="btn btn-dark"/>
             </form>
         </div>
+        {% if warning %}
+            <p> {{ warning }} </p>
+        {% endif %}
         {% if emails %}
         <div class="row">
             <h3>This is your file's content: </h3>
@@ -24,5 +27,6 @@
             {% endfor %}
         </div>
         {% endif %}
+        {{ data  }}
     </div>
 {% endblock %}
