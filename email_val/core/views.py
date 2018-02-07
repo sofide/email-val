@@ -4,13 +4,17 @@ from core.forms import UploadCsvForm
 
 
 def home(request):
+    csv_form = UploadCsvForm()
+
     if request.method == 'POST':
-        csv_form = UploadCsvForm(request.POST)
 
-        if csv_form.is_valid():
-            return render(request, 'core/result.html')
+        data = request.FILES['csv'].read()
+        if type(data) == bytes:
+            data = data.decode()
 
-    else:
-        csv_form = UploadCsvForm()
+        data = [mail.strip() for mail in data.split(';')]
+
+        return render(request, 'core/home.html', {'csv_form': csv_form,
+                                                  'emails': data})
 
     return render(request, 'core/home.html', {'csv_form': csv_form})
