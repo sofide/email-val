@@ -8,10 +8,7 @@ def home(request):
 
     if request.method == 'POST':
 
-        data = request.FILES['csv'].read()
-        if type(data) == bytes:
-            data = data.decode()
-
+        data = request.FILES['csv'].read().decode()
         data = [mail.strip() for mail in data.split(';')]
 
         return render(request, 'core/home.html', {'csv_form': csv_form,
