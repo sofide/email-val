@@ -9,7 +9,6 @@ def home(request):
         csv_form = UploadCsvForm(request.POST, request.FILES)
 
         if csv_form.is_valid():
-            warnings = []
             data = request.FILES['csv'].read().decode().split('\n')
             data = [line.split(';') for line in data]
 
@@ -18,20 +17,18 @@ def home(request):
             try:
                 columns = [int(n) for n in columns]
             except ValueError:
-                warnings.append('Invalid columns format. You have to put'
-                                'numbers separated by  commas. For example: 0, 3')
+                warnings = 'Invalid columns format. You have to put' \
+                           'numbers separated by  commas. For example: 0, 3'
 
                 return render(request, 'core/home.html', {'csv_form': csv_form,
-                                                          'warning': warnings,
-                                                          'data': data})
+                                                          'warning': warnings})
             emails = [line[col]
                       for line in data
                       for col in columns
                       if len(line) > col]
 
             return render(request, 'core/home.html', {'csv_form': csv_form,
-                                                      'emails': emails,
-                                                      'data': data})
+                                                      'emails': emails})
 
     else:
         csv_form = UploadCsvForm()
