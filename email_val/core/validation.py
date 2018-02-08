@@ -31,10 +31,10 @@ def random_validation(email):
 def validator(emails_list):
     if API_KEY:
         validation_function = api_validation
-        validation_from = 'api'
+        validated_by = 'api'
     else:
         validation_function = random_validation
-        validation_from = 'random'
+        validated_by = 'random'
 
     validations = defaultdict(list)
 
@@ -42,4 +42,4 @@ def validator(emails_list):
         result = validation_function
         validations[result['status']].append(email)
 
-    return validations, validation_from
+    return validations, validated_by
