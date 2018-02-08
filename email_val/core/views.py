@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from core.forms import UploadCsvForm
+from core.validation import validator
 
 
 def home(request):
@@ -27,8 +28,14 @@ def home(request):
                       for col in columns
                       if len(line) > col]
 
-            return render(request, 'core/home.html', {'csv_form': csv_form,
-                                                      'emails': emails})
+            emails_validations, validated_by = validator(emails)
+
+            return render(request, 'core/home.html', {
+                'csv_form': csv_form,
+                'emails': emails,
+                'emails_validations': emails_validations,
+                'validated_by': validated_by,
+            })
 
     else:
         csv_form = UploadCsvForm()
