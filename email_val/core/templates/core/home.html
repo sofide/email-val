@@ -4,27 +4,36 @@
     <div class="col-12">
         <h2>Welcome to Email-Validator</h2>
         <div class="row">
-            <p>Please choose a csv with emails separated by a semicolon to validate them</p>
-        </div>
-        <div class="row">
-            <form action="/" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ csv_form.as_p }}
-                <input type="submit" value="Submit" class="btn btn-dark"/>
-            </form>
+            <p>Please choose a csv with columns separated by a semicolon to validate them</p>
         </div>
         {% if warning %}
-            <p> {{ warning }} </p>
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    {{ warning }}
+                </div>
+            </div>
         {% endif %}
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ csv_form.as_p }}
+                        <input type="submit" value="Submit" class="btn btn-dark"/>
+                    </form>
+                </div>
+            </div>
+        </div>
         {% if emails %}
         <div class="row">
-            <h3>This is your file's content: </h3>
+            <h3>These are the emails we will validate: </h3>
         </div>
         <div class="row">
             <ul>
             {% for mail in emails %}
                 <li>{{ mail  }}</li>
             {% endfor %}
+            </ul>
         </div>
         {% endif %}
         {{ data  }}
