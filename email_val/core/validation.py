@@ -22,7 +22,7 @@ def api_validation(email):
 def random_validation(email):
     result = {
         'address': email,
-        'status': random.choice(('valid', 'invalid', 'unknown', 'accept all'))
+        'status': random.choice(('valid', 'invalid', 'unknown', 'accept_all'))
     }
 
     return result
