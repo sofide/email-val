@@ -13,6 +13,9 @@ def home(request):
             data = request.FILES['csv'].read().decode().split('\n')
             data = [line.split(';') for line in data]
 
+            if csv_form.cleaned_data['has_headers']:
+                data = data[1:]
+
             columns = csv_form.cleaned_data['columns'].split(',')
 
             try:
