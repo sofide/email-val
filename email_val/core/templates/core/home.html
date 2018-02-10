@@ -24,6 +24,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-12">
         {% if validated_by == 'random' %}
             <div class="row">
                 <div class="alert alert-danger" role="alert">
@@ -32,17 +34,66 @@
                 </div>
             </div>
         {% endif %}
-        {% if emails %}
-        <div class="row">
-            <h3>These are the emails we will validate: </h3>
-        </div>
-        <div class="row">
-            <ul>
-            {% for mail in emails %}
-                <li>{{ mail  }}</li>
-            {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
     </div>
+
+    {% if 'valid' in emails_validations %}
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"> Valid e-mails:</h3>
+                    <ul class="list-group">
+                    {% for email in emails_validations.valid %}
+                        <li class="list-group-item list-group-item-success"> {{ email }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'invalid' in emails_validations %}
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3> Invalid e-mails:</h3>
+                    <ul class="list-group">
+                    {% for email in emails_validations.invalid %}
+                        <li class="list-group-item list-group-item-danger"> {{ email }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'unknown' in emails_validations %}
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3> We couldn't validate this e-mails:</h3>
+                    <ul class="list-group">
+                    {% for email in emails_validations.unknown %}
+                        <li class="list-group-item list-group-item-dark"> {{ email }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if 'accept_all' in emails_validations %}
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3> This domains accept all the accounts names: </h3>
+                    <ul class="list-group">
+                    {% for email in emails_validations.accept_all %}
+                        <li class="list-group-item list-group-item-warning"> {{ email }} </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
 {% endblock %}
