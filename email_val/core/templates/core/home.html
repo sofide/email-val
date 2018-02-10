@@ -24,6 +24,14 @@
                 </div>
             </div>
         </div>
+        {% if validated_by == 'random' %}
+            <div class="row">
+                <div class="alert alert-danger" role="alert">
+                    IT IS A RANDOM VALIDATION. To use the API to validate correctly please insert
+                    the API_KEY in core/validation.py. 
+                </div>
+            </div>
+        {% endif %}
         {% if emails %}
         <div class="row">
             <h3>These are the emails we will validate: </h3>
