@@ -39,7 +39,7 @@ def validator(emails_list):
     validations = defaultdict(list)
 
     for email in emails_list:
-        result = validation_function
+        result = validation_function(email)
         validations[result['status']].append(email)
 
     return validations, validated_by
