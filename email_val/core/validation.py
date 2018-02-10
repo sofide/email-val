@@ -1,20 +1,20 @@
-import urllib
-import json
 import random
+import requests
 
 from collections import defaultdict
 
 
-API_URL = 'https://bpi.briteverify.com/emails.json?'
+API_URL = 'https://bpi.briteverify.com/emails.json'
 API_KEY = None
 
 
 def api_validation(email):
-    url = API_URL + urllib.parse.urlencode({'adress': email, 'apikey': API_KEY})
-    data = urllib.request.urlopen(url)
-    data = data.read().decode()
+    data = requests(API_URL, params={'adress': email, 'apikey': API_KEY})
 
-    result = json.loads(data)
+    result = data.json()
+
+    if result['status'] == 'accept all':
+        result['status'] = 'accept_all'
 
     return result
 
