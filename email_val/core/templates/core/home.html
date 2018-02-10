@@ -70,7 +70,7 @@
         <div class="col-12 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h3> We couldn't validate this e-mails:</h3>
+                    <h3> We couldn't validate these e-mails:</h3>
                     <ul class="list-group">
                     {% for email in emails_validations.unknown %}
                         <li class="list-group-item list-group-item-dark"> {{ email }} </li>
@@ -85,7 +85,7 @@
         <div class="col-12 col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h3> This domains accept all the accounts names: </h3>
+                    <h3> These domains accept all the accounts names: </h3>
                     <ul class="list-group">
                     {% for email in emails_validations.accept_all %}
                         <li class="list-group-item list-group-item-warning"> {{ email }} </li>
