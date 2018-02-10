@@ -8,6 +8,11 @@ class UploadCsvForm(forms.Form):
         initial=2,
         label='Number of columns where emails are, separeted by comma'
     )
+    delimiter = forms.CharField(
+        max_length=1,
+        initial=',',
+        label='Field delimiter'
+    )
     has_headers = forms.BooleanField(
         required=False,
         initial=True,
