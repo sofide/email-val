@@ -13,9 +13,6 @@ def api_validation(email):
 
     result = data.json()
 
-    if result['status'] == 'accept all':
-        result['status'] = 'accept_all'
-
     return result
 
 
