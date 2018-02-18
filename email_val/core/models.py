@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class email(models.Model):
+class Email(models.Model):
     VALID = 'va'
     INVALID = 'in'
     UNKNOWN = 'un'
