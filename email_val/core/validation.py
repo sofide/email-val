@@ -9,7 +9,7 @@ API_KEY = None
 
 
 def api_validation(email):
-    data = requests.get(API_URL, params={'adress': email, 'apikey': API_KEY})
+    data = requests.get(API_URL, params={'address': email, 'apikey': API_KEY})
 
     result = data.json()
 
