@@ -74,7 +74,12 @@ def validator(emails_list):
     validations = defaultdict(list)
 
     for email in emails_list:
-        result = validation_function(email)
-        validations[result['status']].append(email)
+        if Email.objects.filter(email=email).exists():
+            email_object = Email.objects.filter(email=email).first()
+            validations[email_object.status.status].append(email)
+        else:
+            result = validation_function(email)
+            validations[result['status']].append(email)
+            save_email(result)
 
     return validations, validated_by
