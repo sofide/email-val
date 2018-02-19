@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Status(models.Model):
-    status = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
 
 
 class Email(models.Model):

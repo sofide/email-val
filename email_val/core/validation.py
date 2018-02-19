@@ -41,9 +41,9 @@ def save_email(api_validation):
     address = api_validation['address']
     status_label = api_validation['status']
 
-    if not Status.objects.filter(status=status_label).exists():
-        Status.objects.create(status=status_label)
-    status = Status.objects.filter(status=status_label).first()
+    if not Status.objects.filter(name=status_label).exists():
+        Status.objects.create(name=status_label)
+    status = Status.objects.filter(name=status_label).first()
 
     if Email.objects.filter(email=address).exists():
         email = Email.objects.filter(email=address).first()
@@ -76,7 +76,7 @@ def validator(emails_list):
     for email in emails_list:
         if Email.objects.filter(email=email).exists():
             email_object = Email.objects.filter(email=email).first()
-            validations[email_object.status.status].append(email)
+            validations[email_object.status.name].append(email)
         else:
             result = validation_function(email)
             validations[result['status']].append(email)
