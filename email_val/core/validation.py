@@ -11,6 +11,9 @@ API_KEY = None
 
 
 def api_validation(email):
+    '''
+    Connect with the API to validate emails and returns the json from response
+    '''
     data = requests.get(API_URL, params={'address': email, 'apikey': API_KEY})
 
     result = data.json()
@@ -19,6 +22,9 @@ def api_validation(email):
 
 
 def random_validation(email):
+    '''
+    Returns a random validation
+    '''
     result = {
         'address': email,
         'status': random.choice(('valid', 'invalid', 'unknown', 'accept_all')),
@@ -29,6 +35,9 @@ def random_validation(email):
 
 
 def save_email(api_validation):
+    '''
+    Save api response to database
+    '''
     address = api_validation['address']
     status_label = api_validation['status']
 
@@ -50,6 +59,11 @@ def save_email(api_validation):
 
 
 def validator(emails_list):
+    '''
+    Validate all the emails in the given list, and save them in the database
+    '''
+    # if there is an api_key defined it use the API to validate, otherwise it
+    # use a random validation
     if API_KEY:
         validation_function = api_validation
         validated_by = 'api'
