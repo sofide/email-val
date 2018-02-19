@@ -7,7 +7,7 @@ from core.models import Email, Status
 
 
 API_URL = 'https://bpi.briteverify.com/emails.json'
-API_KEY = None
+API_KEY = '51a90746-2b01-44dd-b565-f3d0455670f4'
 
 
 def api_validation(email):
