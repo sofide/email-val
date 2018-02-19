@@ -19,7 +19,8 @@ def api_validation(email):
 def random_validation(email):
     result = {
         'address': email,
-        'status': random.choice(('valid', 'invalid', 'unknown', 'accept_all'))
+        'status': random.choice(('valid', 'invalid', 'unknown', 'accept_all')),
+        'role_address': False,
     }
 
     return result
