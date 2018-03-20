@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 
-from core.forms import UploadCsvForm
+from core.forms import UploadCsvForm, LoginForm
 from core.validation import validator
 
 
@@ -45,3 +46,27 @@ def home(request):
         csv_form = UploadCsvForm()
 
     return render(request, 'core/home.html', {'csv_form': csv_form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+
+        error_message = ('Invalid login. Please complete the form '
+                         'with your username and password')
+        return render(request, 'core/login.html', {
+            'error_message': error_message,
+            'login_form': login_form,
+        })
+
+    else:
+        login_form = LoginForm()
+        return render(request, 'core/login.html', {'login_form': login_form})
