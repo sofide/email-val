@@ -122,3 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+GET_TOKEN = 'security_token'
+API_KEY = os.environ.get('API_KEY')

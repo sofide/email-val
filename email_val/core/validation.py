@@ -1,14 +1,15 @@
 import random
 import requests
-import os
 
 from collections import defaultdict
+
+from django.conf import settings
 
 from core.models import Email, Status
 
 
 API_URL = 'https://bpi.briteverify.com/emails.json'
-API_KEY = os.environ.get('API_KEY')
+API_KEY = settings.API_KEY
 
 
 def api_validation(email):
