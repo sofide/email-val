@@ -21,6 +21,17 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-dark bg-dark">
         <h1 class="Navbar-text">Email validator</h1>
+        <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+
+              <li class="nav-item">
+                <a href="#">
+                    {{ user.username }}
+                </a>
+              </li>
+              <li class="nav-item"><a href="/logout">Salir</a></li>
+            {% endif %}
+        </ul>
     </nav>
     <!-- /NAVBAR -->
     <div>
