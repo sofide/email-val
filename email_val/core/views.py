@@ -10,6 +10,9 @@ GET_TOKEN = settings.GET_TOKEN
 
 
 def home(request):
+    valid_token = GET_TOKEN == request.GET.get('token')
+    if not request.user.is_authenticated and not valid_token:
+        return redirect('/login/')
 
     if request.method == 'POST':
         csv_form = UploadCsvForm(request.POST, request.FILES)
