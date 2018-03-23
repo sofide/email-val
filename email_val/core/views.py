@@ -74,3 +74,8 @@ def login_view(request):
     else:
         login_form = LoginForm()
         return render(request, 'core/login.html', {'login_form': login_form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
