@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
 
 from core.forms import UploadCsvForm, LoginForm
 from core.validation import validator
+
+
+GET_TOKEN = settings.GET_TOKEN
 
 
 def home(request):
