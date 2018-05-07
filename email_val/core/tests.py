@@ -4,17 +4,19 @@ from core.validation import save_email, random_validation, api_validation
 from core.models import Email, Status
 
 
+EMAIL = 'prueba@bla.com'
+
+
 @pytest.mark.django_db
 def test_save_email():
-    email = 'prueba@bla.com'
-    validation = random_validation(email)
+    validation = random_validation(EMAIL)
     save_email(validation)
-    assert Email.objects.filter(email=email).exists()
+    assert Email.objects.filter(email=EMAIL).exists()
 
 
 def test_api_validation(mocker):
     mocked_requests = mocker.patch('core.validation.requests', autospec=True)
     mocked_requests.get('url').json.return_value = 'JSON RESULT'
-    result = api_validation('blabla')
+    result = api_validation(EMAIL)
 
     assert result == 'JSON RESULT'
