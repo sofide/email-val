@@ -28,3 +28,9 @@ def test_random_validation_result_keys():
 
     for key in ['address', 'status', 'role_address']:
         assert key in result
+
+
+def test_random_validation_result_email():
+    result = random_validation(EMAIL)
+
+    assert result['address'] == 1
