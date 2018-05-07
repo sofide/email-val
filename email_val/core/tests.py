@@ -1,6 +1,7 @@
 import pytest
 
-from core.validation import save_email, random_validation, api_validation
+from core.validation import (save_email, random_validation, api_validation,
+                             random_validation)
 from core.models import Email, Status
 
 
@@ -20,3 +21,10 @@ def test_api_validation(mocker):
     result = api_validation(EMAIL)
 
     assert result == 'JSON RESULT'
+
+
+def test_random_validation_result_keys():
+    result = random_validation(EMAIL)
+
+    for key in ['address', 'status', 'role_address']:
+        assert key in result
