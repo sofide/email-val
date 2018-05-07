@@ -33,4 +33,4 @@ def test_random_validation_result_keys():
 def test_random_validation_result_email():
     result = random_validation(EMAIL)
 
-    assert result['address'] == 1
+    assert result['address'] == EMAIL
