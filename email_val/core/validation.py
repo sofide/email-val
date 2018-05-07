@@ -12,11 +12,11 @@ API_URL = 'https://bpi.briteverify.com/emails.json'
 API_KEY = settings.API_KEY
 
 
-def api_validation(email):
+def api_validation(email, api_url=API_URL):
     '''
     Connect with the API to validate emails and returns the json from response
     '''
-    data = requests.get(API_URL, params={'address': email, 'apikey': API_KEY})
+    data = requests.get(api_url, params={'address': email, 'apikey': API_KEY})
 
     result = data.json()
 
