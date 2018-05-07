@@ -7,6 +7,6 @@ install:
   - pip install codecov pytest-cov
 
 # command to run tests
-before_script: cd email-val
+before_script: cd email_val
 script: pytest -v --cov=./
 after_script: codecov
